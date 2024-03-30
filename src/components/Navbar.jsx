@@ -77,7 +77,7 @@ export default function App() {
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="warning" href="/register" variant="flat">
-            Sign Up
+            Register
           </Button>
         </NavbarItem>
       </NavbarContent>

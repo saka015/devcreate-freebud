@@ -1,36 +1,36 @@
-/* eslint-disable react/prop-types */
+import React from 'react'
 
-const JobCard = (props) => {
+const JobCard = () => {
   return (
-    <div className="border p-3 m-4 rounded-xl flex justify-between">
+    <div className="border p-3 m-4 rounded-xl flex">
       <div>
-        <h1 className="font-bold text-xl">{props.title}</h1>
-        <p className="text-lg">{props.desc}</p>
+        <h1 className="font-bold text-xl">Senior Software Developer</h1>
+        <p className="text-lg">
+          Developing robust software solutions using Java, Python, and
+          JavaScript technologies for Tech Innovations Inc
+        </p>
         <div>
           <button className="bg-gray-100 p-1 px-2 m-1 rounded-xl" disabled>
-            {props.tech1}
+            Java
           </button>
           <button className="bg-gray-100 p-1 px-2 m-1 rounded-xl" disabled>
-            {props.tech2}
+            Python
           </button>
           <button className="bg-gray-100 p-1 px-2 m-1 rounded-xl" disabled>
-            {props.tech3}
+            Javascript
           </button>
         </div>
-        <button
-          className="rounded-xl my-2 bg-orange-100 font-bold p-2 px-6 m-1"
-          disabled
-        >
-          {props.price}
+        <button className="bg-orange-100 font-bold p-2 px-6 m-1" disabled>
+          $5000
         </button>
       </div>
-      <div className="flex-end">
-        <button className="p-2 bg-teal-200 rounded-xl px-6 text-xl bg-opacity-50 hover:bg-opacity-100">
-          Apply
-        </button>
+          <div className='ml-96 mt-24'>
+              <button className='p-2 bg-teal-200 rounded-xl px-6 text-xl bg-opacity-50 hover:bg-opacity-100'>
+                  Apply
+              </button>
       </div>
     </div>
   );
-};
+}
 
-export default JobCard;
+export default JobCard
