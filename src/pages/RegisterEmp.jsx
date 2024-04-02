@@ -3,22 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
-const Register = () => {
-  const [regDone, setRegDone] = useState(false);
+const RegisterEmp = () => {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
     password: "",
+    company: "",
   });
 
-  const regSet = () => {
-    if (credentials.password.length > 0) {
-      // Changed from credentials.password > 0 to credentials.password.length > 0
-      setRegDone(true);
-    }
-  };
+  //   const regSet = () => {
+  //     if (credentials.password.length > 0) {
+  //       // Changed from credentials.password > 0 to credentials.password.length > 0
+  //       setRegDone(true);
+  //     }
+  //   };
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value }); // Changed from square brackets to parentheses
@@ -31,10 +31,11 @@ const Register = () => {
         name: credentials.name,
         email: credentials.email,
         password: credentials.password,
+        company: credentials.company,
       })
     );
 
-    const response = await fetch("http://localhost:5000/api/createuser", {
+    const response = await fetch("http://localhost:5000/api/createemployer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,6 +44,7 @@ const Register = () => {
         name: credentials.name,
         email: credentials.email,
         password: credentials.password,
+        company: credentials.company,
       }),
     });
     const json = await response.json();
@@ -66,8 +68,8 @@ const Register = () => {
   return (
     <div className="flex justify-center mt-36 ">
       <div className="w-[500px] border p-8 rounded-xl shadow-md shadow-teal-200">
-        <h1 className="text-3xl font-semibold text-teal-500 text-center">
-          Register
+        <h1 className="text-3xl font-semibold text-teal-500 text-center my-3">
+          Employer Registration
         </h1>
         <form onSubmit={handleSubmit}>
           <Input
@@ -108,12 +110,24 @@ const Register = () => {
             label="Password"
             placeholder="********"
           />
+          <Input
+            onChange={onChange}
+            value={credentials.company}
+            id="company"
+            name="company"
+            type="text"
+            autoComplete="company"
+            required
+            variant="underlined"
+            label="Company"
+            placeholder="Company name"
+          />
 
           <Button
             type="submit"
             className="w-full border my-4 rounded-md p-2 bg-teal-200 hover:bg-teal-500 font-semibold border-teal-500"
           >
-            Register
+            RegisterEmp
           </Button>
         </form>
         <div className="text-center">
@@ -124,20 +138,13 @@ const Register = () => {
               Login
             </span>
           </Link>
-          <br />
-          <Link to="/createemployer">
-            {" "}
-            <button className="hover:cursor-pointer hover:text-teal-500  hover:underline bg-yellow-100 p-2 rounded-xl mt-6">
-              Register (as Employer)
-            </button>
-          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default RegisterEmp;
 
 /*
 

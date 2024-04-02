@@ -1,5 +1,7 @@
 // import { Link } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
+import {useNavigate} from 'react-router-dom'
+
 
 import {
   Navbar,
@@ -26,6 +28,17 @@ export default function App() {
     "Log Out",
   ];
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    window.location.reload();
+    // navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  };
+
   return (
     <Navbar disableAnimation isBordered>
       {/* Responsive Navbar Content */}
@@ -35,13 +48,19 @@ export default function App() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">FreeBud</p>
+          <Link href="/">
+            {" "}
+            <p className="cursor-pointer font-bold text-inherit">FreeBud</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4">
         <NavbarBrand>
-          <p className="font-bold text-inherit">FreeBud</p>
+          <Link href="/">
+            {" "}
+            <p className="cursor-pointer font-bold text-inherit">FreeBud</p>
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link
@@ -65,21 +84,41 @@ export default function App() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        {/* Login & Sign Up Buttons */}
-        <Link to="user_dashboard">
-          {" "}
-          <NavbarItem>
-            <FaRegCircleUser className="text-4xl text-teal-400 hover:bg-yellow-100 cursor-pointer rounded-full p-1 mx-8" />
-          </NavbarItem>
-        </Link>
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
+        {/* Login & Sign Up Buttons */}{" "}
         <NavbarItem>
-          <Button as={Link} color="warning" href="/register" variant="flat">
-            Register
-          </Button>
+          <Link href="/user_dash">
+            {" "}
+            <FaRegCircleUser className="text-4xl text-teal-400 hover:bg-yellow-100 cursor-pointer rounded-full p-1 mx-8" />
+          </Link>
         </NavbarItem>
+        {!localStorage.getItem("authToken") ? (
+          <div className="flex gap-x-2">
+            <NavbarItem className="hidden lg:flex">
+              <Link href="/loginuser">Login</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Button
+                as={Link}
+                color="warning"
+                href="/createuser"
+                variant="flat"
+              >
+                Register
+              </Button>
+            </NavbarItem>
+          </div>
+        ) : (
+          <NavbarItem>
+            <Button
+              onClick={handleLogout}
+              as={Link}
+              color="danger"
+              variant="flat"
+            >
+              Logout
+            </Button>
+          </NavbarItem>
+        )}
       </NavbarContent>
 
       <NavbarMenu>

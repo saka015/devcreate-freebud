@@ -2,7 +2,7 @@ import { Input, Button } from "@nextui-org/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginEmp = () => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -23,7 +23,7 @@ const Login = () => {
       })
     );
 
-    const response = await fetch("http://localhost:5000/api/loginuser", {
+    const response = await fetch("http://localhost:5000/api/loginemployer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const Login = () => {
       localStorage.setItem("userEmail", credentials.email);
       localStorage.setItem("authToken", json.authToken);
       console.log(localStorage.getItem("authToken"));
-      navigate("/upload_docs");
+      navigate("/createnewjob");
     }
   };
 
@@ -53,7 +53,7 @@ const Login = () => {
     <div className="flex justify-center mt-36 ">
       <div className="w-[400px] border p-8 rounded-xl shadow-md shadow-teal-200">
         <h1 className="text-3xl font-semibold text-teal-500 text-center">
-          Login
+          LoginEmp
         </h1>
         <form onSubmit={handleSubmit} method="POST">
           <Input
@@ -86,7 +86,7 @@ const Login = () => {
             type="submit"
             className="w-full border my-4 rounded-md p-2 bg-teal-200 hover:bg-teal-500 font-semibold border-teal-500"
           >
-            Login
+            LoginEmp
           </Button>
         </form>
         <div className="text-center">
@@ -103,18 +103,4 @@ const Login = () => {
   );
 };
 
-export default Login;
-
-/* import React, { useState } from "react";
-import Footer from "../components/Footer";
-
-
-const Login = () => {
-
-
-    
-  
-
-
-
-            */
+export default LoginEmp;
